@@ -11,19 +11,13 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+	if (b === 0) return `🙅`;
 	return a / b;
 }
-
-let firstNum;
-let secondNum;
-let operator;
 
 function operate(operation, num1, num2) {
 	return operation(num1, num2);
 }
-
-const display = document.querySelector('.display');
-let displayVal = '';
 
 function updateDisplay() {
 	display.textContent = displayVal;
@@ -34,23 +28,16 @@ function displayNumber(button) {
 	updateDisplay();
 }
 
-for (const digit of document.querySelectorAll('.digit')) {
-	digit.addEventListener('click', () => displayNumber(digit));
-}
+function setNum(value) {
+	if (value === '') return;
 
-for (const operatorBtn of document.querySelectorAll('.operator')) {
-	operatorBtn.addEventListener('click', () => setOperator(operatorBtn));
-}
-
-function setNumber() {
-	if (!firstNum) {
-		firstNum = +displayVal;
-	} else {
-		secondNum = +displayVal;
+	if (firstNum === '') {
+		firstNum = Number(value);
+	} else if (secondNum === '') {
+		secondNum = Number(value);
 	}
 
 	displayVal = '';
-	updateDisplay();
 }
 
 function setOperator(button) {
@@ -70,22 +57,49 @@ function setOperator(button) {
 	}
 }
 
-// store the first number when an operator is selected
-// store operator when selected
-// store the second number when another operator is selected
+function evaluate() {
+	if (firstNum === '' || secondNum === '' || operator === '') return;
+
+	const result = operate(operator, firstNum, secondNum);
+	displayVal = Math.round((result + Number.EPSILON) * 10000) / 10000;
+	updateDisplay();
+	displayVal = '';
+	firstNum = result;
+	secondNum = '';
+}
+
+function reset() {
+	displayVal = '';
+	firstNum = '';
+	secondNum = '';
+	operator = '';
+	updateDisplay();
+}
+
+const display = document.querySelector('.display');
+let displayVal = '';
+
+for (const digit of document.querySelectorAll('.digit')) {
+	digit.addEventListener('click', () => displayNumber(digit));
+}
+
+let firstNum = '';
+let secondNum = '';
+let operator;
+
 for (const operatorBtn of document.querySelectorAll('.operator')) {
 	operatorBtn.addEventListener('click', () => {
-		setNumber();
+		setNum(displayVal);
+		evaluate();
 		setOperator(operatorBtn);
 	})
 }
 
-// store the second number when enter is selected
-// call operate on all three
-// display the result
 const equals = document.querySelector('#equals');
 equals.addEventListener('click', () => {
-	setNumber();
-	displayVal = operate(operator, firstNum, secondNum);
-	updateDisplay();
+	setNum(displayVal);
+	evaluate();
 });
+
+const clear = document.querySelector('#clear');
+clear.addEventListener('click', reset);

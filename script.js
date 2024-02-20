@@ -23,8 +23,9 @@ function updateDisplay() {
 	display.textContent = displayVal;
 }
 
-function displayNumber(button) {
-	displayVal += button.textContent;
+function displayDigit(digit) {
+	if (digit === '.' && displayVal.includes('.')) return;
+	displayVal += digit;
 	updateDisplay();
 }
 
@@ -40,8 +41,8 @@ function setNum(value) {
 	displayVal = '';
 }
 
-function setOperator(button) {
-	switch (button.textContent) {
+function setOperator(operation) {
+	switch (operation) {
 		case '+':
 			operator = add;
 			break;
@@ -52,6 +53,7 @@ function setOperator(button) {
 			operator = multiply;
 			break;
 		case '÷':
+		case '/':
 			operator = divide;
 			break;
 	}
@@ -81,6 +83,26 @@ function backspace() {
 	updateDisplay();
 }
 
+function parseInput(event) {
+	const input = event.key;
+	const digits = '0123456789.';
+	const operators = '+-*/';
+	const evaluators = '=Enter';
+
+	if (digits.includes(input)) {
+		displayDigit(input);
+	} else if (operators.includes(input)) {
+		setNum(displayVal);
+		evaluate();
+		setOperator(input);
+	} else if (evaluators.includes(input)) {
+		setNum(displayVal);
+		evaluate();
+	} else if (input === 'Backspace') {
+		backspace();
+	}
+}
+
 let displayVal = '';
 let firstNum = '';
 let secondNum = '';
@@ -88,14 +110,14 @@ let operator = '';
 const display = document.querySelector('.display');
 
 for (const digitBtn of document.querySelectorAll('.digit')) {
-	digitBtn.addEventListener('click', () => displayNumber(digitBtn));
+	digitBtn.addEventListener('click', () => displayDigit(digitBtn.textContent));
 }
 
 for (const operatorBtn of document.querySelectorAll('.operator')) {
 	operatorBtn.addEventListener('click', () => {
 		setNum(displayVal);
 		evaluate();
-		setOperator(operatorBtn);
+		setOperator(operatorBtn.textContent);
 	})
 }
 
@@ -111,7 +133,7 @@ clearBtn.addEventListener('click', reset);
 const deleteBtn = document.querySelector('#delete');
 deleteBtn.addEventListener('click', backspace);
 
-const decimalBtn = document.querySelector('.decimal');
-decimalBtn.addEventListener('click', () => {
-	if (!displayVal.includes('.')) displayNumber(decimalBtn);
-})
+const periodBtn = document.querySelector('.decimal');
+periodBtn.addEventListener('click', () => displayDigit(periodBtn.textContent));
+
+document.addEventListener('keydown', parseInput);

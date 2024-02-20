@@ -81,16 +81,15 @@ function backspace() {
 	updateDisplay();
 }
 
-const display = document.querySelector('.display');
 let displayVal = '';
-
-for (const digit of document.querySelectorAll('.digit')) {
-	digit.addEventListener('click', () => displayNumber(digit));
-}
-
 let firstNum = '';
 let secondNum = '';
 let operator = '';
+const display = document.querySelector('.display');
+
+for (const digitBtn of document.querySelectorAll('.digit')) {
+	digitBtn.addEventListener('click', () => displayNumber(digit));
+}
 
 for (const operatorBtn of document.querySelectorAll('.operator')) {
 	operatorBtn.addEventListener('click', () => {
@@ -100,14 +99,14 @@ for (const operatorBtn of document.querySelectorAll('.operator')) {
 	})
 }
 
-const equals = document.querySelector('#equals');
-equals.addEventListener('click', () => {
+const equalsBtn = document.querySelector('#equals');
+equalsBtn.addEventListener('click', () => {
 	setNum(displayVal);
 	evaluate();
 });
 
-const clear = document.querySelector('#clear');
-clear.addEventListener('click', reset);
+const clearBtn = document.querySelector('#clear');
+clearBtn.addEventListener('click', reset);
 
 const deleteBtn = document.querySelector('#delete');
 deleteBtn.addEventListener('click', backspace);

@@ -76,6 +76,11 @@ function reset() {
 	updateDisplay();
 }
 
+function backspace() {
+	displayVal = '';
+	updateDisplay();
+}
+
 const display = document.querySelector('.display');
 let displayVal = '';
 
@@ -85,7 +90,7 @@ for (const digit of document.querySelectorAll('.digit')) {
 
 let firstNum = '';
 let secondNum = '';
-let operator;
+let operator = '';
 
 for (const operatorBtn of document.querySelectorAll('.operator')) {
 	operatorBtn.addEventListener('click', () => {
@@ -103,3 +108,6 @@ equals.addEventListener('click', () => {
 
 const clear = document.querySelector('#clear');
 clear.addEventListener('click', reset);
+
+const deleteBtn = document.querySelector('#delete');
+deleteBtn.addEventListener('click', backspace);

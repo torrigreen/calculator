@@ -111,3 +111,8 @@ clear.addEventListener('click', reset);
 
 const deleteBtn = document.querySelector('#delete');
 deleteBtn.addEventListener('click', backspace);
+
+const decimalBtn = document.querySelector('.decimal');
+decimalBtn.addEventListener('click', () => {
+	if (!displayVal.includes('.')) displayNumber(decimalBtn);
+})

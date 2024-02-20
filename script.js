@@ -79,7 +79,7 @@ function reset() {
 }
 
 function backspace() {
-	displayVal = '';
+	displayVal = displayVal.slice(0, -1);
 	updateDisplay();
 }
 

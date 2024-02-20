@@ -51,7 +51,7 @@ function setOperator(button) {
 		case '*':
 			operator = multiply;
 			break;
-		case '/':
+		case '÷':
 			operator = divide;
 			break;
 	}
@@ -88,7 +88,7 @@ let operator = '';
 const display = document.querySelector('.display');
 
 for (const digitBtn of document.querySelectorAll('.digit')) {
-	digitBtn.addEventListener('click', () => displayNumber(digit));
+	digitBtn.addEventListener('click', () => displayNumber(digitBtn));
 }
 
 for (const operatorBtn of document.querySelectorAll('.operator')) {

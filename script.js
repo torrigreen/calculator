@@ -24,6 +24,7 @@ function updateDisplay() {
 }
 
 function displayDigit(digit) {
+	if (displayVal.length > 8) return;
 	if (digit === '.' && displayVal.includes('.')) return;
 	displayVal += digit;
 	updateDisplay();

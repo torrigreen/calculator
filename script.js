@@ -50,6 +50,7 @@ function setOperator(operation) {
 			operator = subtract;
 			break;
 		case '*':
+		case '×':
 			operator = multiply;
 			break;
 		case '÷':
@@ -132,8 +133,5 @@ clearBtn.addEventListener('click', reset);
 
 const deleteBtn = document.querySelector('#delete');
 deleteBtn.addEventListener('click', backspace);
-
-const periodBtn = document.querySelector('.decimal');
-periodBtn.addEventListener('click', () => displayDigit(periodBtn.textContent));
 
 document.addEventListener('keydown', parseInput);

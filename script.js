@@ -65,11 +65,9 @@ function evaluate() {
 	if (firstNum === '' || secondNum === '' || operator === '') return;
 
 	const result = operate(operator, firstNum, secondNum);
-	if (result === '🙅') {
-		displayVal = result;
-	} else {
-		displayVal = 
-		(Math.round((result + Number.EPSILON) * 10000) / 10000).toPrecision(9);
+	displayVal = result;
+	if (`${displayVal}`.length > 10) {
+		displayVal = displayVal.toPrecision(9);
 	}
 	updateDisplay();
 	displayVal = '';

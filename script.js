@@ -65,7 +65,8 @@ function evaluate() {
 	if (firstNum === '' || secondNum === '' || operator === '') return;
 
 	const result = operate(operator, firstNum, secondNum);
-	displayVal = Math.round((result + Number.EPSILON) * 10000) / 10000;
+	displayVal = 
+	(Math.round((result + Number.EPSILON) * 10000) / 10000).toPrecision(9);
 	updateDisplay();
 	displayVal = '';
 	firstNum = result;

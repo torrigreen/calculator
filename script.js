@@ -11,7 +11,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-	if (b === 0) return `🙅`;
+	if (b === 0) return '🙅';
 	return a / b;
 }
 
@@ -65,8 +65,12 @@ function evaluate() {
 	if (firstNum === '' || secondNum === '' || operator === '') return;
 
 	const result = operate(operator, firstNum, secondNum);
-	displayVal = 
-	(Math.round((result + Number.EPSILON) * 10000) / 10000).toPrecision(9);
+	if (result === '🙅') {
+		displayVal = result;
+	} else {
+		displayVal = 
+		(Math.round((result + Number.EPSILON) * 10000) / 10000).toPrecision(9);
+	}
 	updateDisplay();
 	displayVal = '';
 	firstNum = result;

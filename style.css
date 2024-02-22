@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;0,900;1,300&display=swap');
+
 body {
 	display: flex;
 	justify-content: center;
 	background-color: #1f1f1f;
+	font-family: Roboto, sans-serif;
 }
 
 .calculator {

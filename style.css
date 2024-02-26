@@ -67,8 +67,7 @@ body {
 	border-radius: 32px;
 }
 
-button:hover{
+button:active{
 	background-color:#ffffff;
 	color: black;
-	transition: 0.5s;
 }
